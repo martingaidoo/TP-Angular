@@ -14,7 +14,8 @@ import { CommonModule } from '@angular/common';
 export class LoginComponent {
   loginForm: FormGroup;
   submitted=false
-
+  testing="dev"
+  libertadores=[ "1986", "1996", "2015", "2018"]
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService
