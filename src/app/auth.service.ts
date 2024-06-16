@@ -12,9 +12,6 @@ export class AuthService {
 
   async login(body: LoginI): Promise<TokenI> {
     try {
-      console.log("estoooooooo")
-      console.log(this.url)
-      console.log(body)
       const response = (await axios.post(`${this.url}/login`, body)).data;
       localStorage.setItem('token', JSON.stringify(response));
       return response;
