@@ -5,17 +5,12 @@
   padding-left: 2em;
   padding-right: 2em;
   padding-bottom: 0.4em;
-  background-color: #5f5d5d;
-  border-color: #070707;  
+  background-color: #171717;
   border-radius: 25px;
-  transition: .4s ease-in-out;  
+  transition: .4s ease-in-out;
 }
 
 
-.field:hover {
-  transform: scale(1.05);
-  border: 1px solid black;
-}
 
 #heading {
   text-align: center;
@@ -34,7 +29,7 @@
   border: none;
   outline: none;
   color: white;
-  background-color: #070707;
+  background-color: #171717;
   box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
 }
 
@@ -108,26 +103,4 @@
 .button3:hover {
   background-color: red;
   color: white;
-}
-
-.navbar {
-  background-color: rgb(246, 6, 6) !important;
-}
-
-.texto-river {
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 20px; /* Cambia el tamaño de la fuente según tus necesidades */
-  font-weight: bold; /* Ajusta el peso de la fuente */
-  color: #ffffff; /* Cambia el color de la fuente */
-}
-
-.boton-buscar{
-  border-color: #ffffff;
-  color: #ffffff;
-}
-
-.texto-912{
-  color: #000000;
-  font-size: 200px;
-  
 }

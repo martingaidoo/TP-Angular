@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { AuthService } from '../auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
@@ -15,24 +17,27 @@ export class LoginComponent {
   loginForm: FormGroup;
   submitted=false
   testing="dev"
-  libertadores=[ "1986", "1996", "2015", "2018"]
+
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(2)]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
     });
   }
 
   async onSubmit(): Promise<void> {
+    console.log(this.loginForm)
     this.submitted=true
     if (this.loginForm.invalid) {
       return;
     }
     try {
       await this.authService.login(this.loginForm.value);
+      this.router.navigate(['/home']);
     } catch (error: any) {
       console.log(error)
       alert('Error en el inicio de sesión');
