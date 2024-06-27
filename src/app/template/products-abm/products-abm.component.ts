@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../core/services/api.service';
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-products-abm',
@@ -11,8 +14,8 @@ import { ApiService } from '../../core/services/api.service';
 })
 export class ProductsABMComponent {
   products: any[] = [];
-
-  constructor(private api: ApiService) {}
+  selectedProduct: any = null;
+  constructor(private api: ApiService, private router: Router) {}
 
   async ngOnInit() {
     await this.getProducts();
@@ -23,8 +26,24 @@ export class ProductsABMComponent {
       this.products = await this.api.getProducts();
       console.log(this.products); // Log products to the console
     } catch (error) {
-      console.error(error);
       alert('Error al obtener los productos');
     }
   }
+  async updateProductById(product: any) {
+    console.log(product);
+    this.router.navigate(['/form-products']);
+    console.log('/form-products?id='+product.id)
+  }
+  
+  async deleteProductById(id: number) {
+    try {
+      await this.api.deleteProductById(id);
+      await this.getProducts();
+    } catch (error) {
+      alert('Error al eliminar el producto');
+    }    
+  }
+
+  
+
 }

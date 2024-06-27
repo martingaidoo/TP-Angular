@@ -32,7 +32,7 @@ export class ApiService {
           statusText: 'Unauthorized'
         });
       }
-      return (await axios.get(`${this.url}/products`, {
+      return (await axios.get(`${this.url}/products/`, {
         headers: {
           'Authorization': `Bearer ${accessToken}`
         }
@@ -41,4 +41,27 @@ export class ApiService {
       throw new HttpErrorResponse({ error });
     }
   }
+
+  async deleteProductById(id: number): Promise<any> {
+    try {
+      const accessToken = this.getAccessToken();
+      if (!accessToken) {
+        throw new HttpErrorResponse({
+          error: 'No access token found',
+          status: 401,
+          statusText: 'Unauthorized'
+        });
+      }
+      return (await axios.delete(`${this.url}/products/${id}`, {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`
+        }
+      })).data;
+    } catch (error) {
+      throw new HttpErrorResponse({ error });
+    }
+  }
+  
+
+
 }

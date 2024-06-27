@@ -15,8 +15,12 @@ export const routes: Routes = [
       {
         path: 'list-products',
         loadComponent: () => import('./template/products-abm/products-abm.component').then(m => m.ProductsABMComponent)
-      }
+      },
+      {path: 'form-products',
+        loadComponent: () => import('./template/form-products/form-products.component').then(m => m.FormProductsComponent)
+      }     
     ],
+    
     canActivate: [AuthGuardService],
   },
   { path: 'login', component: LoginComponent },
