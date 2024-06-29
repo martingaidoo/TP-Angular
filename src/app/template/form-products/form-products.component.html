@@ -1,33 +1,39 @@
 <div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <label for="idInputCodigo">Code</label>
-            <input type="text" class="form-control" id="idInputCodigo" name="name" disabled>
+    <form>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="idInputCodigo">Code</label>
+                <input type="text" class="form-control" id="idInputCodigo" [value]="id" name="id" disabled>
+            </div>
+            <div class="col-md-6">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="idInputName" [(ngModel)]="product.name" name="name" enabled>
+            </div>
+            
         </div>
-        <div class="col-md-6">
-            <label for="name">Name</label>
-            <input type="text" class="form-control" id="idInputName" name="name" enabled>
-        </div>
-
-    </div>
-    <div class="row">
+        <div class="row">
         <div class="col-md-6">
             <label for="idInputPrice">Price</label>
-            <input type="number" class="form-control" id="idInputPrice" name="precio" enabled>
+            <input type="number" class="form-control" id="idInputPrice" [(ngModel)]="product.price" name="price" enabled>
         </div>
         <div class="col-md-6">
             <label for="idInputTalle">Size</label>
-            <input type="text" class="form-control" id="idInputTalle" name="name" enabled>
+            <input type="text" class="form-control" id="idInputTalle" [(ngModel)]="product.size" name="size" enabled>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <label for="idInputMarca">Brand</label>
-            <input type="text" class="form-control" id="idInputMarca" name="precio" enabled>
         </div>
-        <div class="col-md-6">
-            <label for="idInputTipoProduct">Product type</label>
-            <input type="text" class="form-control" id="idInputTipoProduct" name="precio" enabled>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="idInputColor">Color</label>
+                <input type="text" class="form-control" id="idInputColor" [(ngModel)]="product.color" name="color" enabled>
+            </div>
         </div>
-    </div>
+        <div class="row mt-3 justify-content-center">
+
+            <div class="col-md-4 d-flex justify-content-between">
+                <button type="button" class="btn btn-danger" (click)="cancelarProduct()">Cancelar</button>
+                <button type="submit" class="btn btn-primary" (click)="saveProduct()">Guardar</button>
+            </div>
+        </div>
+
+    </form>
 </div>

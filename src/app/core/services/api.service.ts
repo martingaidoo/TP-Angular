@@ -42,6 +42,38 @@ export class ApiService {
     }
   }
 
+  async getProductById(id: number): Promise<any> {
+    try {
+      const response = await axios.get(`${this.url}/products/${id}`);
+      return response.data; // Asegúrate de retornar los datos aquí
+    } catch (error) {
+      throw new HttpErrorResponse({ error });
+    }
+  }
+
+  async updateProductById(id: number, product: any): Promise<any> {
+    try {
+      axios.put(`${this.url}/products/${id}`, product)
+    .then((productById) => {
+      console.log(productById);
+    })
+    } catch (error) {
+      throw new HttpErrorResponse({ error });
+    }
+  }
+
+  async createProduct(product: any): Promise<any> {
+    try {
+      axios.post(`${this.url}/products/`, product)
+    .then((product) => {
+      console.log(product);
+      return product;
+    })
+    } catch (error) {
+      throw new HttpErrorResponse({ error });
+    }
+  }
+
   async deleteProductById(id: number): Promise<any> {
     try {
       const accessToken = this.getAccessToken();

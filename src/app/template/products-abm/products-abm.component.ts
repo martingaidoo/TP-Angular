@@ -29,10 +29,13 @@ export class ProductsABMComponent {
       alert('Error al obtener los productos');
     }
   }
-  async updateProductById(product: any) {
-    console.log(product);
-    this.router.navigate(['/form-products']);
-    console.log('/form-products?id='+product.id)
+  async updateProductById(product?: any) {
+    console.log("holaaa");
+    if (product) {
+      this.router.navigate(['/form-products'], { queryParams: { id: product.id } });
+    }else{
+      this.router.navigate(['/form-products']);
+    }
   }
   
   async deleteProductById(id: number) {
