@@ -39,6 +39,9 @@ export class FormProductsComponent implements OnInit {
       this.product.size = productById.size;
       this.product.color = productById.color
     }
+    else{
+      this.id='';
+    }
 
   }
 
