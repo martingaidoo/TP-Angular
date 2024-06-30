@@ -94,6 +94,27 @@ export class ApiService {
     }
   }
   
+  async getProductTypes(): Promise<any> {
+    try {
+        const accessToken = this.getAccessToken();
+        console.log(accessToken);
+        if (!accessToken) {
+            throw new HttpErrorResponse({
+                error: 'No access token found',
+                status: 401,
+                statusText: 'Unauthorized'
+            });
+        }
+        return (await axios.get(`${this.url}/product-types/`, {
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
+            }
+        })).data;
+    } catch (error) {
+        throw new HttpErrorResponse({ error });
+    }
+}
+
 
 
 }

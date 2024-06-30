@@ -19,6 +19,7 @@ export class ProductsABMComponent {
 
   async ngOnInit() {
     await this.getProducts();
+    
   }
 
   async getProducts() {
