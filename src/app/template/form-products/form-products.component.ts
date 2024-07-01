@@ -19,15 +19,15 @@ export class FormProductsComponent implements OnInit {
   id: string = '';
 
   product = {
-    'name': '',
-    'price': 0,
-    'size': '',
-    'color': '',
-    'productType': ''
+    'name': null,
+    'price': null,
+    'size': null,
+    'color': null,
+    'productType': null
   };
 
   productTypes: any[] = [];
-
+  
   constructor(private route: ActivatedRoute, private router: Router, private api: ApiService) { }
 
   async ngOnInit() {
@@ -45,26 +45,32 @@ export class FormProductsComponent implements OnInit {
       this.product.price = productById.price;
       this.product.size = productById.size;
       this.product.color = productById.color;
-      this.product.productType = productById.productType;
+      this.product.productType = productById.productType.id;
+      console.log('productById', productById);
     } else {
       this.id = '';
     }
   }
 
   async saveProduct() {
-    if (this.id) {
-      console.log('update', this.product, this.product.productType);
-      await this.api.updateProductById(parseInt(this.id), this.product);
-      this.router.navigate(['/list-products']);
-    } else {
-      try {
-        await this.api.createProduct(this.product);
+    if (this.product.name && this.product.price && this.product.size && this.product.color && this.product.productType){
+      if (this.id) {
+        console.log('update', this.product, this.product.productType);
+        await this.api.updateProductById(parseInt(this.id), this.product);
         this.router.navigate(['/list-products']);
-      } catch (error) {
-        alert('Error al crear el producto');
+      } else {
+        try {
+          await this.api.createProduct(this.product);
+          this.router.navigate(['/list-products']);
+        } catch (error) {
+          alert('Error al crear el producto');
+        }
       }
-    }
+      alert('El producto se ha guardado correctamente');
+    }else{
+      alert('Por favor complete todos los campos');
   }
+}
 
   cancelarProduct() {
     this.router.navigate(['/list-products']);
