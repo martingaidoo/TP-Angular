@@ -1,6 +1,7 @@
 export interface TokenI {
   accessToken: string;
   refreshToken: string;
+  expirationTime: string;
 }
 
 export interface LoginI {
