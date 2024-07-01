@@ -1,5 +1,5 @@
 <div class="container">
-  <form (ngSubmit)="saveProduct()">
+  <form (ngSubmit)="saveProduct()" #form="ngForm">
     <div class="row">
       <div class="col-md-6">
         <label for="idInputCodigo">Code</label>
@@ -35,7 +35,8 @@
     <div class="row mt-3 justify-content-center">
       <div class="col-md-4 d-flex justify-content-between">
         <button type="button" class="btn btn-danger" (click)="cancelarProduct()" data-bs-toggle="modal" data-bs-target="#cancelarProduct">Cancelar</button>
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        <!-- Deshabilita el botón si el formulario es inválido -->
+        <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Guardar</button>
       </div>
     </div>
   </form>
