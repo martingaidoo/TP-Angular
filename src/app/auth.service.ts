@@ -13,6 +13,16 @@ export class AuthService {
 
   constructor() {}
 
+    // Método para obtener el token almacenado en el localStorage
+    private getAccessToken(): string | null {
+      const token = localStorage.getItem('token');
+      if (token) {
+        const parsedToken = JSON.parse(token);
+        return parsedToken.accessToken || null;
+      }
+      return null;
+    }
+
   async login(body: LoginI): Promise<TokenI> {
     try {
       const response = (await axios.post(`${this.url}/login`, body)).data;
@@ -87,4 +97,16 @@ export class AuthService {
       }
     }
   }
+
+  async validateToken(): Promise<boolean> {
+    try {
+      const response = await axios.get(`${this.url}/users/validateToken`, {
+        headers: { Authorization: `Bearer ${this.getAccessToken()}` },
+      });
+      return response.data;
+    } catch (error) {
+      throw new HttpErrorResponse({ error });
+    }
+  }
+
 }
