@@ -1,0 +1,14 @@
+.small-btn {
+    font-size: 14px; /* Reduce el tamaño del texto */
+    padding: 7px 12px; /* Ajusta el padding para hacer el botón más pequeño */
+    /* Ajusta otras propiedades según sea necesario */
+  }
+
+  .fuente-roboto{
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .fuente-roboto-light{
+    font-family: 'Roboto Light', sans-serif;
+    font-size: 25px;
+  }

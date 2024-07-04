@@ -24,7 +24,6 @@ export class ApiService {
   async getProducts(): Promise<any> {
     try {
       const accessToken = this.getAccessToken();
-      console.log(accessToken);
       if (!accessToken) {
         throw new HttpErrorResponse({
           error: 'No access token found',
@@ -37,6 +36,28 @@ export class ApiService {
           'Authorization': `Bearer ${accessToken}`
         }
       })).data;
+    } catch (error) {
+      throw new HttpErrorResponse({ error });
+    }
+  }
+
+  async getProductByFilter(type: string, brand: string, min?:number, max?:number): Promise<any> {
+    try {
+      const accessToken = this.getAccessToken();      
+      const queryParams = [
+        type != null ? `type=${type}` : '',
+        brand != null ? `brand=${brand}` : '',
+        min != null ? `minPrice=${min}` : '',
+        max != null ? `maxPrice=${max}` : ''
+      ].filter(Boolean).join('&'); // Filtra los elementos vacíos y une con '&'
+      console.log(queryParams);
+      const response = await axios.get(`${this.url}/products?${queryParams}`,{
+        headers: {
+          'Authorization': `Bearer ${accessToken}`
+        }
+      });
+      console.log(response.data);
+      return response.data; // Asegúrate de retornar los datos aquí
     } catch (error) {
       throw new HttpErrorResponse({ error });
     }
@@ -91,6 +112,28 @@ export class ApiService {
       })).data;
     } catch (error) {
       throw new HttpErrorResponse({ error });
+    }
+  }
+
+
+  async getBrands(): Promise<any> {
+    try {
+        const accessToken = this.getAccessToken();
+        console.log(accessToken);
+        if (!accessToken) {
+            throw new HttpErrorResponse({
+                error: 'No access token found',
+                status: 401,
+                statusText: 'Unauthorized'
+            });
+        }
+        return (await axios.get(`${this.url}/brands/`, {
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
+            }
+        })).data;
+    } catch (error) {
+        throw new HttpErrorResponse({ error });
     }
   }
   
