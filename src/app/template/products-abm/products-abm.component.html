@@ -65,9 +65,9 @@
         </thead>
         <tbody class="table-group-divider">
           <tr *ngFor="let product of products">
-            <th class="pt-3" scope="row">{{ product.id }}</th>
-            <th class="pt-3">{{ product.name }}</th>
-            <th class="pt-3">{{ product.brand.name }}</th>
+            <td class="pt-3" scope="row">{{ product.id }}</td>
+            <td class="pt-3">{{ product.name }}</td>
+            <td class="pt-3">{{ product.brand.name }}</td>
             <td class="pt-3">{{ product.productType.name }}</td>
             <td class="pt-3">${{ product.price }}</td>
             <td><button (click)="updateProductById(product)" class="bi bi-pencil btn btn-outline-success rounded mr-2"></button>

@@ -50,13 +50,11 @@ export class ApiService {
         min != null ? `minPrice=${min}` : '',
         max != null ? `maxPrice=${max}` : ''
       ].filter(Boolean).join('&'); // Filtra los elementos vacíos y une con '&'
-      console.log(queryParams);
       const response = await axios.get(`${this.url}/products?${queryParams}`,{
         headers: {
           'Authorization': `Bearer ${accessToken}`
         }
       });
-      console.log(response.data);
       return response.data; // Asegúrate de retornar los datos aquí
     } catch (error) {
       throw new HttpErrorResponse({ error });
@@ -87,7 +85,6 @@ export class ApiService {
     try {
       axios.post(`${this.url}/products/`, product)
     .then((product) => {
-      console.log(product);
       return product;
     })
     } catch (error) {
@@ -140,7 +137,6 @@ export class ApiService {
   async getProductTypes(): Promise<any> {
     try {
         const accessToken = this.getAccessToken();
-        console.log(accessToken);
         if (!accessToken) {
             throw new HttpErrorResponse({
                 error: 'No access token found',

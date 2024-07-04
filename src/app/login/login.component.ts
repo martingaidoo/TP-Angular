@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../core/services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -30,7 +30,6 @@ export class LoginComponent {
   }
 
   async onSubmit(): Promise<void> {
-    console.log(this.loginForm)
     this.submitted=true
     if (this.loginForm.invalid) {
       return;
@@ -39,7 +38,6 @@ export class LoginComponent {
       await this.authService.login(this.loginForm.value);
       this.router.navigate(['/home']);
     } catch (error: any) {
-      console.log(error)
       alert('Error en el inicio de sesión');
     }
   }

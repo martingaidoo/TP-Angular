@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
-import { LoginI, RegisterI, TokenI } from './interfaces/token';
+import { LoginI, RegisterI, TokenI } from '../../interfaces/token';
 import { HttpErrorResponse } from '@angular/common/http';
 import { timer } from 'rxjs';
 import moment from 'moment';
@@ -27,7 +27,6 @@ export class AuthService {
     try {
       const response = (await axios.post(`${this.url}/login`, body)).data;
       localStorage.setItem('token', JSON.stringify(response));
-      
       this.scheduleTokenRefresh(response.expirationTime); //esto es para ejecutar la función de refreshToken
 
       return response;
@@ -46,7 +45,6 @@ export class AuthService {
 
   async refreshToken() {
     const tokenObject = JSON.parse(localStorage.getItem('token') ?? '{"refreshToken":""}');
-
     try {
       const response = (
         await axios.get(`${this.url}/refresh`, {
@@ -57,8 +55,8 @@ export class AuthService {
       ).data;
       tokenObject.accessToken = response.accessToken;
       tokenObject.expirationTime = response.expirationTime;
-
-      localStorage.setItem('token', JSON.stringify(tokenObject));
+      
+      localStorage.setItem('token', JSON.stringify(tokenObject));//seteo el nuevo token en el local storage
       
       // Schedule the next token refresh
       this.scheduleTokenRefresh(response.expirationTime); // ejecuta la funcion del refresh token para iniciar un nuevo ciclo

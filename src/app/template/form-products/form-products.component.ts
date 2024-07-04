@@ -23,10 +23,12 @@ export class FormProductsComponent implements OnInit {
     'price': null,
     'size': null,
     'color': null,
-    'productType': null
-  };
+    'productType': null,
+    'brand' : null
+    };
 
   productTypes: any[] = [];
+  productBrand: any[] = [];
   
   constructor(private route: ActivatedRoute, private router: Router, private api: ApiService) { }
 
@@ -35,27 +37,28 @@ export class FormProductsComponent implements OnInit {
 
     try {
       this.productTypes = await this.api.getProductTypes();
+      this.productBrand = await this.api.getBrands();
     } catch (error) {
       console.error('Error al obtener los tipos de productos', error);
     }
 
     if (this.id) {
       const productById = await this.api.getProductById(parseInt(this.id));
+      console.log(productById)
       this.product.name = productById.name;
       this.product.price = productById.price;
       this.product.size = productById.size;
       this.product.color = productById.color;
       this.product.productType = productById.productType.id;
-      console.log('productById', productById);
+      this.product.brand = productById.brand.id;
     } else {
       this.id = '';
     }
   }
 
   async saveProduct() {
-    if (this.product.name && this.product.price && this.product.size && this.product.color && this.product.productType){
+    if (this.product.name && this.product.price && this.product.size && this.product.color && this.product.productType, this.product.brand){
       if (this.id) {
-        console.log('update', this.product, this.product.productType);
         await this.api.updateProductById(parseInt(this.id), this.product);
         this.router.navigate(['/list-products']);
       } else {

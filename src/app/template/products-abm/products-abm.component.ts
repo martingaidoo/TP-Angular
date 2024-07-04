@@ -47,6 +47,7 @@ export class ProductsABMComponent {
   async getProducts() {
     try {
       this.products = await this.api.getProducts();
+  
     } catch (error) {
       alert('Error al obtener los productos');
     }
